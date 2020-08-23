@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Latihan 1 - JS</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/mycss.css" />
+  </head>
+  <body>
+    <style>
+      .icon{
+          position: relative;
+          z-index: 1;
+          left: 93%;
+          top: -25px;
+      }
+      .iconbt{
+          position: relative;
+          z-index: 1;
+          left: -75px;
+          top: 0px;
+          color: #fff;
+      }
+      .button{
+        font-size: 11px;
+        
+      }
+
+      .center {
+        margin: auto;
+        width: 50%;
+        margin-top: 10%;
+      }
+      
+      .form-control{
+          border: 0;
+          border-radius: 0px;
+          border-bottom: 0.1px solid #ccc;
+          padding: 0px;
+          box-shadow:0 0 0;
+      }
+      .bt-login{
+          border-radius: 20px;
+          font-family: "Lucida Console", Courier;
+      }
+  </style>
+    <div class="form-group center">
+      <div class="container">
+        <div class="row" id="imgform">
+          <div class="col-med-8" id="regform">
+            <figure><img src="images/login-image.jpg" alt="sing up image"></figure>
+          </div>
+          <div class="col-med-8">
+
+          </div>
+          
+          <div class="col-med-8" id="regform">
+            <h1 class="h3 mb-3 font-weight-normal">LOGIN</h1>
+            <div class="text-muted">
+              <label>Belum memiliki akun? <a href="#">Daftar</a></label>
+            </div>
+            <div class="row">
+              &nbsp;&nbsp;
+            </div>
+            <form>
+              <div class="form-group">
+                <input id="email" type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                <svg width="1em" id="icon-email" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-fill icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                </svg>
+              </div>
+              <div class="form-group">
+                <input type="password" id="inputPassword" placeholder="Password" class="form-control" required>
+                <svg width="1em" id="eyes-open" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill icon" onclick="eyes()" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                    <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                </svg>
+                <svg width="1em" id="eyes-close" height="1em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill icon" onclick="eyes()" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                  <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                  <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                  <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                </svg>
+              </div>
+              <div class="checkbox mb-3 text-muted small">
+                <label>
+                  <input type="checkbox" value="remember-me"> Ingat Saya
+                </label>
+              </div>
+              <div class="form-group col-lg-15">
+                <button class="button btn btn-lg btn-primary bt-login" type="submit" id="btnLogin" onclick="validate()">&nbsp;&nbsp;LOGIN</button>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-in-right iconbt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8.146 11.354a.5.5 0 0 1 0-.708L10.793 8 8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+                  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 1 8z"/>
+                  <path fill-rule="evenodd" d="M13.5 14.5A1.5 1.5 0 0 0 15 13V3a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 4 3v1.5a.5.5 0 0 0 1 0V3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5h-8A.5.5 0 0 1 5 13v-1.5a.5.5 0 0 0-1 0V13a1.5 1.5 0 0 0 1.5 1.5h8z"/>
+                </svg>
+                
+              </div>
+              
+              <div class = "form-group small">
+                  <label class="mb-3 text-muted text-center">Lupa Password</label>
+              </div>
+  
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+   
+    
+    <script>
+      let passObj = document.querySelector("#inputPassword");
+      let showPass = document.querySelector("#eyes-open");
+      let hidePass = document.querySelector("#eyes-close");
+      let iconEmail = document.querySelector("#icon-email");
+
+      showPass.style.display = "block";
+      hidePass.style.display = "none";
+      iconEmail.style.display = "block";
+
+      function validate(){
+        
+        if (passObj.value.length < 5){
+          alert("Panjang Password minimal 4 karakter");
+        }
+      }
+      
+      
+      function eyes(){
+        // x.classList.toggle("bi-eye-slash-fill");
+        if (passObj.type === "password") {
+          passObj.type = "text";
+          showPass.style.display = "none";
+          hidePass.style.display = "block";
+        } else {
+          passObj.type = "password";
+          showPass.style.display = "block";
+          hidePass.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>
