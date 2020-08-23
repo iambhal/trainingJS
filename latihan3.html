@@ -70,7 +70,7 @@
                     <th>Nama Produk</th>
                     <th>Harga Produk</th>
                     <th>Kategori Produk</th>
-                    <th>&nbsp;</th>
+                    <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -138,6 +138,7 @@
         
           data.saveData(productName.value, productPrice.value, productCategory.value);
           showData(data.mData);
+          clearForm();
       });
 
     </script>
