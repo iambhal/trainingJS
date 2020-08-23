@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Produk</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/mycss.css" />
+  </head>
+  <style>
+    .center {
+        margin: auto;
+        width: 50%;
+        margin-top: 10%;
+        border-block-color: #ffffff;
+    }
+  </style>
+  
+  <body>
+    <div class="form-group center">
+        <div class="container">
+            <div class="row" id="regform">
+              <div class="col-xl-12">
+                <h1>Form Tambah Data Produk</h1>
+                <form action="/action_page.php">
+                  <div class="form-group">
+                    <label for="name">Nama Produk</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Nama Produk"
+                      id="name"
+                    /><input type="hidden" id="dataindex" value="0" />
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Harga Produk</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Harga Produk"
+                      id="price"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Kategori Produk</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Kategori Produk"
+                      id="category"
+                    />
+                  </div>
+                  <button id="savebutton" type="button" class="btn btn-primary">Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+        <div class="form-group">
+
+        </div class="form-group">
+            <div class="form-group">
+            <div>
+
+            </div>
+            <table id="productlist" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nama Produk</th>
+                    <th>Harga Produk</th>
+                    <th>Kategori Produk</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <ul class="pagination" id="memberpaging">
+                 
+                </ul>
+              
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="js/ProdukData.js"></script>
+    <script>
+      let addOrEdit = 0;
+      let data = new ProdukData();
+      data.init();
+
+      let productName = document.querySelector("#name");
+      let productPrice = document.querySelector("#price");
+      let productCategory = document.querySelector("#category");
+      let productIndex = document.querySelector("#dataindex");
+      let saveObj = document.querySelector("#savebutton");
+      let productListObj = document.querySelector("#productlist tbody");
+      saveObj.value="Submit"
+
+      function showData(data) {
+        let tmp = "";
+        data.forEach(function (item, index) {
+          tmp =
+            tmp +
+            `<tr>
+             <td>${index+1}</td>
+             <td>${item.name}</td>
+             <td>${item.price}</td>
+             <td>${item.category}</td>
+             <td>
+                <a href="javascript:" onClick="showDel(${index})">
+                     Delete
+                </a>
+                   &nbsp;&nbsp;
+                <a href="javascript:" onClick="showEdit(${index})">
+                     Edit
+                </a>
+            </td>
+             </tr>`;
+        });
+        productListObj.innerHTML = tmp;
+      }
+
+      function clearForm() {
+        productName.value = "";
+        productPrice.value = "";
+        productCategory.value = "";
+        productIndex.value = 0;
+        saveObj.innerHTML="Submit"
+      }
+
+      function showEdit(index) {
+        let dataEdit = data.getDataByIndex(index);
+        productName.value = dataEdit.name;
+        productPrice.value = dataEdit.price;
+        productCategory.value = dataEdit.category;
+        productIndex.value = index;
+        saveObj.innerHTML="Edit"
+        addOrEdit = 1;
+      }
+
+      function showDel(index) {
+        let yourConfirm = confirm("Anda yakin Hapus ?");
+        if (yourConfirm) {
+          data.deleteDataByIndex(index);
+          showData(data.mData);
+        }
+      }
+
+      saveObj.addEventListener("click", function () {
+        
+        if (addOrEdit == 0) {
+          //add
+          data.saveData(productName.value, productPrice.value, productCategory.value);
+          
+        } else {
+          //edit
+          data.editDataByIndex(
+            productName.value,
+            productPrice.value,
+            productCategory.value,
+            productIndex.value
+          );
+          addOrEdit = 0;
+          
+        }
+
+        clearForm();
+        showData(data.mData);
+      });
+
+    </script>
+  </body>
+</html>

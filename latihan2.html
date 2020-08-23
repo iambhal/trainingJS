@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/mycss.css" />
+  </head>
+  <style>
+    .center {
+        margin: auto;
+        width: 50%;
+        margin-top: 10%;
+        border-block-color: #ffffff;
+    }
+  </style>
+  
+  <body>
+    <div class="form-group center">
+        <div class="container">
+            <div class="row" id="regform">
+              <div class="col-xl-12">
+                <h1>Registration Form</h1>
+                <form action="/action_page.php">
+                  <div class="form-group">
+                    <label for="name">Nama Lengkap</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Nama Lengkap"
+                      id="name"
+                    /><input type="hidden" id="dataindex" value="0" />
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Jenis Kelamin</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Jenis Kelamin"
+                      id="sex"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="name">No. Handphone</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="No. Handphone"
+                      id="nohp"
+                    />
+                  </div>
+                  <div class="form-group">
+                      <label for="name">Alamat</label>
+                      <textarea
+                        type="email"
+                        class="form-control"
+                        placeholder=""
+                        id="address"
+                      ></textarea>
+                    </div>
+                  <button id="savebutton" type="button" class="btn btn-primary">
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+        <div class="form-group">
+
+        </div class="form-group">
+            <div class="form-group">
+            <div>
+
+            </div>
+            <table id="memberlist" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nama Lengkap</th>
+                    <th>Jenis Kelamin</th>
+                    <th>No. Handphone</th>
+                    <th>Alamat</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <ul class="pagination" id="memberpaging">
+                 
+                </ul>
+              
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="js/MemberData.js"></script>
+    <script>
+      
+      let data = new MemberData();
+      data.init();
+
+      let memberName = document.querySelector("#name");
+      let memberSex = document.querySelector("#sex");
+      let memberNoHp = document.querySelector("#nohp");
+      let memberAddress = document.querySelector("#address");
+      let memberIndex = document.querySelector("#dataindex");
+      let saveObj = document.querySelector("#savebutton");
+      let memberListObj = document.querySelector("#memberlist tbody");
+
+      function showData(data) {
+        let tmp = "";
+        data.forEach(function (item, index) {
+          tmp =
+            tmp +
+            `<tr>
+             <td>${index+1}</td>
+             <td>${item.name}</td>
+             <td>${item.sex}</td>
+             <td>${item.nohp}</td>
+             <td>${item.address}</td>
+             <td>
+                   <a href="javascript:" onClick="showDel(${index})">
+                     X
+                   </a>
+                 </td>
+             </tr>`;
+        });
+        memberListObj.innerHTML = tmp;
+      }
+
+      function clearForm() {
+        memberName.value = "";
+        memberSex.value = "";
+        memberNoHp.value = "";
+        memberAddress.value = "";
+        memberIndex.value = 0;
+      }
+
+      function showDel(index) {
+        let yourConfirm = confirm("Anda yakin Hapus ?");
+        if (yourConfirm) {
+          data.deleteDataByIndex(index);
+          showData(data.mData);
+        }
+      }
+
+      saveObj.addEventListener("click", function () {
+          data.saveData(memberName.value, memberSex.value, memberNoHp.value, memberAddress.value);
+          showData(data.mData);
+      });
+
+    </script>
+  </body>
+</html>
