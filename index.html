@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple CMS</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/mycss.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row" id="regform">
+        <div class="col-xl-12">
+          <h1>Registration Form</h1>
+          <form action="/action_page.php">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Name"
+                id="name"
+              /><input type="hidden" id="dataindex" value="0" />
+            </div>
+            <div class="form-group">
+              <label for="name">Phone:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Phone Number"
+                id="phone"
+              />
+            </div>
+            <div class="form-group">
+              <label for="name">Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter E-mail"
+                id="email"
+              />
+            </div>
+            <button id="savebutton" type="button" class="btn btn-primary">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12">
+          <h2>Member List</h2>
+          <table id="memberlist" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+			  <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>
+					  <a href="javascript:" >
+						 <img src="assets/i_edit.png" />
+					  </a>     
+						 &nbsp;&nbsp;
+					  <a href="javascript:" >      
+						 <img src="assets/i_delete.png" />
+					  </a>     
+                  </td>
+                </tr>
+			</tbody>
+          </table>
+          <ul class="pagination" id="memberpaging">
+            <!--
+              <li class="page-item">
+              <a class="page-link" href="#">Previous</a>
+            </li>
+            <li class="page-item" page="1">
+              <a class="page-link" href="javascript:" onclick="pageClick(1)"
+                >1</a
+              >
+            </li>
+            <li class="page-item active">
+              <a
+                class="page-link"
+                href="javascript:"
+                page="2"
+                onclick="pageClick(2)"
+                >2</a
+              >
+            </li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            -->
+          </ul>
+        </div>
+      </div>
+    </div>
+   
+    <script src="js/MemberData.js"></script>
+    <script>
+      let data = new MemberData();
+      data.init();
+      // alert(data.mData.length);
+      let memberName = document.querySelector("#name");
+      let memberEmail = document.querySelector("#email");
+      let memberPhone = document.querySelector("#phone");
+      let saveObj = document.querySelector("#savebutton");
+
+      saveObj.addEventListener("click",function(){
+        data.saveData(memberName.value,memberEmail.value,memberPhone.value);
+        
+      })
+    </script>
+  </body>
+</html>
